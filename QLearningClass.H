@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 
 using namespace std;
@@ -30,18 +31,26 @@ class QLearningClass
     std::vector<string> nextState_;
     std::vector<string> currentState_;
     std::vector<string> direction_;
+    string state_;
 
   public:
     int getValue(int index);
     string getNextState(int index);
     string getDirection(int index);
-
+//Setters
+    void setState(string state);
+    void setValue(int value);
+    void setNextState(string nxtState);
+    void setDirection(string dir);
+   
 };
+
 
 class containerQLearningClass
 {
 public:
   containerQLearningClass(string fileName_);
+  std::vector<QLearningClass> q_;
 };
  #endif 
 
