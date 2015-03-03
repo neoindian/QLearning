@@ -20,6 +20,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <time.h>
+#include <stdlib.h>
 
 
 using namespace std;
@@ -27,19 +29,20 @@ using namespace std;
 class QLearningClass
 {
   private:
-    std::vector<int> values_;
+    std::vector<double> values_;
     std::vector<string> nextState_;
     std::vector<string> currentState_;
     std::vector<string> direction_;
     string state_;
 
   public:
-    int getValue(int index);
+    double getValue(int index);
     string getNextState(int index);
     string getDirection(int index);
 //Setters
     void setState(string state);
-    void setValue(int value);
+    void setValue(double value,int index);
+    void setValue(double value);
     void setNextState(string nxtState);
     void setDirection(string dir);
    
@@ -50,7 +53,20 @@ class containerQLearningClass
 {
 public:
   containerQLearningClass(string fileName_);
-  std::vector<QLearningClass> q_;
+  void claimReward(double& reward, string & nextState);
+  void selectAction(int stateRowNum,string & action,int & actNum);
+  int getMaxQValue(const string nextState);
+
+  void flushToFile(void);
+  void flushChkPointsToFile(void);
+
+  void qLearningAlgorithm(void);
+
+  std::vector<QLearningClass> qRVal_;
+  std::vector<QLearningClass> qDashRVal_;
+  std::vector<int> loopChkPoints;
+  std::vector<double> qValPoints;
+  std::vector<string> actions_;
 };
  #endif 
 
